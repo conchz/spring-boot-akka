@@ -16,13 +16,14 @@ open class AppConfig {
     @Autowired
     private lateinit var applicationContext: ApplicationContext
 
-    @Autowired
-    private lateinit var springExtension: SpringExtension
-
     @Bean
     open fun actorSystem(): ActorSystem {
         val actorSystem = ActorSystem.create("demo-actor-system", ConfigFactory.load("akka"))
-        springExtension.initialize(applicationContext)
         return actorSystem
+    }
+
+    @Bean
+    open fun springExtension(): SpringExtension {
+        return SpringExtension(applicationContext)
     }
 }
