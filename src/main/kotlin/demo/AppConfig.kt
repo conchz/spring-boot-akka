@@ -8,6 +8,7 @@ import org.springframework.boot.SpringBootConfiguration
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.PropertySource
+import org.springframework.core.annotation.Order
 
 @SpringBootConfiguration
 @PropertySource("classpath:springboot.properties")
@@ -17,13 +18,9 @@ open class AppConfig {
     private lateinit var applicationContext: ApplicationContext
 
     @Bean
-    open fun actorSystem(): ActorSystem {
-        val actorSystem = ActorSystem.create("demo-actor-system", ConfigFactory.load("akka"))
-        return actorSystem
-    }
+    @Order(-100)
+    open fun springExtension(): SpringExtension = SpringExtension(applicationContext)
 
     @Bean
-    open fun springExtension(): SpringExtension {
-        return SpringExtension(applicationContext)
-    }
+    open fun actorSystem(): ActorSystem = ActorSystem.create("demo", ConfigFactory.load("akka"))
 }

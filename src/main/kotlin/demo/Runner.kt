@@ -6,7 +6,7 @@ import akka.pattern.Patterns
 import akka.util.Timeout
 import demo.actor.WorkerActor
 import demo.di.SpringExtension
-import org.slf4j.LoggerFactory
+import demo.util.loggerFor
 import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
 @Component
 open class Runner : CommandLineRunner, InitializingBean, DisposableBean {
 
-    private val logger = LoggerFactory.getLogger(this.javaClass)
+    private val logger = loggerFor<Runner>()
 
     @Autowired
     private lateinit var actorSystem: ActorSystem
@@ -38,7 +38,7 @@ open class Runner : CommandLineRunner, InitializingBean, DisposableBean {
         workerActor.tell(WorkerActor.Request(), null)
         workerActor.tell(WorkerActor.Request(), null)
 
-        val duration = FiniteDuration.create(1, TimeUnit.SECONDS)
+        val duration = FiniteDuration.create(3, TimeUnit.SECONDS)
         val awaitable = Patterns.ask(workerActor, WorkerActor.Response(), Timeout.durationToTimeout(duration))
 
         logger.info("Response: " + Await.result(awaitable, duration))

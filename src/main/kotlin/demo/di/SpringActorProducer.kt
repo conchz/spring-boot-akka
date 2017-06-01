@@ -12,6 +12,7 @@ class SpringActorProducer(val applicationContext: ApplicationContext,
     }
 
     override fun actorClass(): Class<out Actor> {
+        @Suppress("UNCHECKED_CAST")
         return applicationContext.getType(actorBeanName) as Class<out Actor>
     }
 }
