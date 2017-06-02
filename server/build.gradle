@@ -1,6 +1,6 @@
-group 'org.lavenderx'
-version rootProject.version
+apply plugin: 'org.springframework.boot'
 
 dependencies {
-    compile project(':common')
+    compile project(':common'),
+            rootProject.ext.dependencies['spring-boot-starter-actuator']
 }

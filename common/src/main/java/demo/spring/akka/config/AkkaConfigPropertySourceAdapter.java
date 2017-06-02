@@ -1,7 +1,7 @@
 package demo.spring.akka.config;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.PropertySource;
@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  */
 public class AkkaConfigPropertySourceAdapter {
 
-    private static Log log = LogFactory.getLog(AkkaConfigPropertySourceAdapter.class);
+    private static Logger log = LoggerFactory.getLogger(AkkaConfigPropertySourceAdapter.class);
 
     public static final Pattern INDEXED_PROPERTY_PATTERN = Pattern.compile("^\\s*(?<path>\\w+(?:\\.\\w+)*)\\[(?<index>\\d+)\\]\\s*$");
 

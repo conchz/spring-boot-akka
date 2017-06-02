@@ -1,8 +1,8 @@
 package demo.spring.akka.config;
 
 import com.typesafe.config.ConfigFactory;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -22,9 +22,10 @@ import org.springframework.stereotype.Component;
  * @see demo.spring.akka.AkkaAutoConfiguration
  */
 @Component
-public class AkkaConfigPropertySourceBeanFactoryPostProcessor implements BeanFactoryPostProcessor, ApplicationContextAware, EnvironmentAware {
+public class AkkaConfigPropertySourceBeanFactoryPostProcessor
+        implements BeanFactoryPostProcessor, ApplicationContextAware, EnvironmentAware {
 
-    private static Log log = LogFactory.getLog(AkkaConfigPropertySourceBeanFactoryPostProcessor.class);
+    private static Logger log = LoggerFactory.getLogger(AkkaConfigPropertySourceBeanFactoryPostProcessor.class);
 
     protected ApplicationContext applicationContext = null;
     protected ConfigurableEnvironment environment = null;

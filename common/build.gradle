@@ -1,2 +1,7 @@
-group 'org.lavenderx'
-version rootProject.version
+dependencies {
+    compile rootProject.ext.dependencies['typesafe-config'],
+            rootProject.ext.dependencies['spring-core'],
+            rootProject.ext.dependencies['spring-beans'],
+            rootProject.ext.dependencies['spring-context'],
+            rootProject.ext.dependencies['spring-boot-autoconfigure']
+}
