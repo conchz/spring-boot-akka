@@ -1,4 +1,4 @@
-package demo
+package demo.config
 
 import akka.actor.ActorSystem
 import com.typesafe.config.ConfigFactory
@@ -12,7 +12,7 @@ import org.springframework.core.annotation.Order
 
 @SpringBootConfiguration
 @PropertySource("classpath:springboot.properties")
-open class AppConfig {
+open class RootConfig {
 
     @Autowired
     private lateinit var applicationContext: ApplicationContext
@@ -22,5 +22,6 @@ open class AppConfig {
     open fun springExtension(): SpringExtension = SpringExtension(applicationContext)
 
     @Bean
-    open fun actorSystem(): ActorSystem = ActorSystem.create("demo", ConfigFactory.load("akka"))
+    @Order(-1)
+    open fun actorSystem(): ActorSystem = ActorSystem.create("demo", ConfigFactory.load())
 }

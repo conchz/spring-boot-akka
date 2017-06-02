@@ -6,7 +6,7 @@ import akka.pattern.Patterns
 import akka.util.Timeout
 import demo.actor.WorkerActor
 import demo.di.SpringExtension
-import demo.util.loggerFor
+import demo.util.KotlinLogging
 import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
 @Component
 open class Runner : CommandLineRunner, InitializingBean, DisposableBean {
 
-    private val logger = loggerFor<Runner>()
+    private val logger = KotlinLogging.logger {}
 
     @Autowired
     private lateinit var actorSystem: ActorSystem

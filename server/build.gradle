@@ -1,0 +1,6 @@
+group 'org.lavenderx'
+version rootProject.version
+
+dependencies {
+    compile project(':common')
+}

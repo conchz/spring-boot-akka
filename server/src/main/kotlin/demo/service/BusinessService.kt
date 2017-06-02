@@ -1,12 +1,12 @@
 package demo.service
 
-import demo.util.loggerFor
+import demo.util.KotlinLogging
 import org.springframework.stereotype.Component
 
 @Component
 open class BusinessService {
 
-    private val logger = loggerFor<BusinessService>()
+    private val logger = KotlinLogging.logger {}
 
     fun perform(o: Any) {
         logger.info("Perform: {}", o)

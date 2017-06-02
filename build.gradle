@@ -4,6 +4,7 @@ version '1.0-SNAPSHOT'
 buildscript {
     ext {
         kotlin_version = '1.1.2-2'
+        scala_version = '2.12.2'
         spring_boot_version = '1.5.3.RELEASE'
         akka_version = '2.5.2'
         jackson_version = '2.8.8'
@@ -18,33 +19,61 @@ buildscript {
 }
 
 apply plugin: 'idea'
-apply plugin: 'java'
-apply plugin: 'kotlin'
-apply plugin: 'org.springframework.boot'
 
-compileJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+    apply plugin: 'scala'
+    apply plugin: 'org.springframework.boot'
 
-configurations {
 
-}
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
-}
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
 
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    sourceSets {
+        main {
+            scala {
+                srcDirs = ['src/main/java', 'src/main/kotlin', 'src/main/scala']
+            }
+            java {
+                srcDirs = []
+            }
+        }
 
-    compile "org.springframework.boot:spring-boot-starter-actuator:$spring_boot_version"
+        test {
+            scala {
+                srcDirs = ['src/test/java', 'src/test/kotlin', 'src/test/scala']
+            }
+            java {
+                srcDirs = []
+            }
+        }
+    }
 
-    compile "com.typesafe.akka:akka-cluster-sharding_2.12:$akka_version"
-    compile "com.typesafe.akka:akka-slf4j_2.12:$akka_version"
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+        compile "org.scala-lang:scala-library:$scala_version"
 
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
-    compile "org.apache.commons:commons-lang3:3.5"
+        compile "org.springframework.boot:spring-boot-starter-actuator:$spring_boot_version"
+
+        compile "com.typesafe.akka:akka-cluster-sharding_2.12:$akka_version"
+        compile "com.typesafe.akka:akka-slf4j_2.12:$akka_version"
+
+        compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
+    }
+
+    tasks.withType(ScalaCompile) {
+        scalaCompileOptions.with {
+            encoding = "UTF-8"
+            force = true
+        }
+    }
 }
