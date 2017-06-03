@@ -12,7 +12,7 @@ class ActorSystemBeanPostProcessor(applicationContext: ConfigurableApplicationCo
   override def postProcessBeforeInitialization(bean: AnyRef, beanName: String): AnyRef = {
     bean match {
       case system: ActorSystem => {
-        log.info(s"Registering extension ${SpringExtension.getClass.getSimpleName} on actor system ${system.name}")
+        logger.info(s"Registering extension ${SpringExtension.getClass.getSimpleName} on actor system ${system.name}")
         system.registerExtension(SpringExtension).applicationContext = applicationContext
         bean
       }

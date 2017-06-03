@@ -32,13 +32,13 @@ class ActorSystemLifecycle(actorSystem: ActorSystem) extends SmartLifecycle with
 
   override def stop(callback: Runnable): Unit = {
     if (actorSystem.whenTerminated.isCompleted) {
-      log.warn(s"Actor system ${actorSystem.name} already terminated")
+      logger.warn(s"Actor system ${actorSystem.name} already terminated")
       callback.run()
     } else {
-      log.info(s"Terminating actor system ${actorSystem.name}")
+      logger.info(s"Terminating actor system ${actorSystem.name}")
       actorSystem.registerOnTermination(callback)
       actorSystem.registerOnTermination {
-        log.info(s"Actor system ${actorSystem.name} terminated")
+        logger.info(s"Actor system ${actorSystem.name} terminated")
       }
       actorSystem.terminate()
     }

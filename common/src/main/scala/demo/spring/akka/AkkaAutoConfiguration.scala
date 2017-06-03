@@ -53,7 +53,7 @@ class AkkaAutoConfiguration(actorSystemName: String) extends SpringLogging {
   @Bean /*(destroyMethod = "")*/
   @ConditionalOnMissingBean(Array(classOf[ActorSystem]))
   def actorSystem(config: Config): ActorSystem = {
-    log.info(s"""Creating actor system "${actorSystemName}"""")
+    logger.info(s"""Creating actor system "${actorSystemName}"""")
     ActorSystem(actorSystemName, Option(config), Option(applicationContext.getClassLoader), Option(executionContext))
   }
 
@@ -69,7 +69,7 @@ class AkkaAutoConfiguration(actorSystemName: String) extends SpringLogging {
   @Bean
   @ConditionalOnMissingBean(Array(classOf[ActorSystemLifecycle]))
   def actorSystemLifecycle(actorSystem: ActorSystem): ActorSystemLifecycle = {
-    log.info(s"""Creating lifecycle for actor system "${actorSystem.name}"""")
+    logger.info(s"""Creating lifecycle for actor system "${actorSystem.name}"""")
     ActorSystemLifecycle(actorSystem)
   }
 

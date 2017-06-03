@@ -3,4 +3,8 @@ apply plugin: 'org.springframework.boot'
 dependencies {
     compile project(':common'),
             rootProject.ext.dependencies['spring-boot-starter-actuator']
+
+    testCompile rootProject.ext.dependencies['scalatest'],
+            rootProject.ext.dependencies['spring-test'],
+            rootProject.ext.dependencies['spring-boot-test']
 }
