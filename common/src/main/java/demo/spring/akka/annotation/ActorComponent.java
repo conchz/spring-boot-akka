@@ -1,4 +1,4 @@
-package demo.spring.akka;
+package demo.spring.akka.annotation;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

@@ -1,6 +1,7 @@
 package demo.spring.akka
 
 import akka.actor.{Actor, IndirectActorProducer}
+import demo.spring.akka.annotation.ActorComponent
 import org.springframework.context.ConfigurableApplicationContext
 
 import scala.collection.immutable
