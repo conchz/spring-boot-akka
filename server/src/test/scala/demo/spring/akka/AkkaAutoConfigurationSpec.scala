@@ -6,7 +6,6 @@ import akka.util.Timeout
 import demo.actor.EchoActor
 import demo.spring.akka.annotation.{ActorBean, ActorComponent}
 import demo.spring.test.TestContextManagement
-import grizzled.slf4j.Logger
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{FlatSpec, Matchers}
 import org.springframework.beans.factory.annotation.Autowired
@@ -126,8 +125,7 @@ object AkkaAutoConfigurationSpec {
    * Demonstrates a parent/child actor.
    */
   @ActorComponent
-  class ParentActor extends SpringActor {
-    val logger = Logger(classOf[ParentActor])
+  class ParentActor extends SpringActor with SpringLogging {
     val child = actorOf[EchoActor]
 
     logger.info(s"parent actor path: ${self.path}")
