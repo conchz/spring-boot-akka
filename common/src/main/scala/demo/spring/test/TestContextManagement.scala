@@ -67,7 +67,7 @@ protected object AlwaysDirtiesContextTestExecutionListener extends DirtiesContex
 
     val annotationType: String = classOf[DirtiesContext].getName
     val annAttrs: AnnotationAttributes = AnnotatedElementUtils.getMergedAnnotationAttributes(testClass, annotationType)
-    val hierarchyMode: DirtiesContext.HierarchyMode = if ((annAttrs == null)) null else annAttrs.getEnum[DirtiesContext.HierarchyMode]("hierarchyMode")
+    val hierarchyMode: DirtiesContext.HierarchyMode = if (annAttrs == null) null else annAttrs.getEnum[DirtiesContext.HierarchyMode]("hierarchyMode")
     dirtyContext(testContext, hierarchyMode)
   }
 }
