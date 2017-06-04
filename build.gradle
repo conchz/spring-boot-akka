@@ -21,10 +21,11 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'scala'
 
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
-    compileJava {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+    configurations {
+        provided
     }
 
     repositories {
@@ -60,6 +61,10 @@ subprojects {
     }
 
     tasks.withType(ScalaCompile) {
+        configure(scalaCompileOptions.forkOptions) {
+            memoryMaximumSize = '1g'
+            jvmArgs = ['-XX:MaxMetaspaceSize=512m']
+        }
         scalaCompileOptions.with {
             encoding = "UTF-8"
             force = true
